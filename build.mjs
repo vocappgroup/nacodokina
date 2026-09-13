@@ -39,9 +39,28 @@ const pickFor = cinema => {
   return { title: f.m.title, orig: f.m.originalTitle, rating: f.m.imdb.rating, votes: f.m.imdb.votes, imdbId: f.m.imdb.id,
     time: best.start.slice(11, 16), end: best.end.slice(11, 16), ver, good: best.seats?.good ?? null, goodTotal: best.seats?.goodTotal ?? null, pairs: best.seats?.pairs ?? null, poster: f.m.poster, ticketUrl: best.ticketUrl };
 };
+const filmKey = m => m.imdb?.id ?? m.id;
+const filmsFor = cinema => {
+  const shows = raw.screenings.filter(s => s.cinemaId === cinema.id && s.day === today && new Date(s.start).getTime() > now);
+  const groups = {};
+  for (const s of shows) {
+    const m = raw.movies[s.movieId];
+    const g = (groups[filmKey(m)] ??= { m, shows: [] });
+    if (isUaPrint(g.m) && !isUaPrint(m)) g.m = m;
+    g.shows.push(s);
+  }
+  return Object.fromEntries(Object.entries(groups).map(([key, g]) => {
+    const shows2 = g.shows.sort((a, b) => a.start.localeCompare(b.start));
+    const best = shows2.find(s => !s.seats || s.seats.good >= 6) ?? shows2.find(s => !s.seats || s.seats.good >= 1) ?? shows2[0];
+    const ver = best.speaking === 'DUB' ? (isUaPrint(raw.movies[best.movieId]) ? 'DUB UA' : 'DUB') : best.speaking === 'ORG' ? 'ORG' : 'NAP';
+    return [key, { title: g.m.title, orig: g.m.originalTitle, rating: hasRating(g.m) ? g.m.imdb.rating : null, votes: g.m.imdb?.votes ?? 0, imdbId: g.m.imdb?.id ?? null,
+      time: best.start.slice(11, 16), end: best.end.slice(11, 16), ver, good: best.seats?.good ?? null, goodTotal: best.seats?.goodTotal ?? null, pairs: best.seats?.pairs ?? null,
+      poster: g.m.poster, ticketUrl: best.ticketUrl, times: shows2.map(s => s.start.slice(11, 16)) }];
+  }));
+};
 const picks = {
   generatedAt: raw.generatedAt, day: today, dayLabel: 'dziś',
-  cinemas: Object.fromEntries(Object.values(raw.cinemas).map(c => [c.slug, { slug: c.slug, cinemaId: c.id, city: c.city, cinema: c.name, pick: pickFor(c) }])),
+  cinemas: Object.fromEntries(Object.values(raw.cinemas).map(c => [c.slug, { slug: c.slug, cinemaId: c.id, city: c.city, cinema: c.name, pick: pickFor(c), films: filmsFor(c) }])),
 };
 
 // ---------- compact payload for the page ----------

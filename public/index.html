@@ -132,6 +132,9 @@ h2{font:600 22px/1.1 Oswald,"Arial Narrow",sans-serif;letter-spacing:.01em;margi
 .rating.mid{background:var(--mid-bg);color:var(--mid)} .rating.lo{background:var(--lo-bg);color:var(--lo)}
 .rating.none{background:var(--surface-2);color:var(--ink-3)} .rating.none .num{font-size:22px}
 .film-dim{opacity:.7;box-shadow:none;background:transparent}
+.film .side{display:flex;flex-direction:column;align-items:stretch;gap:6px;align-self:center}
+.film .sharebtn{font-size:12.5px;padding:6px 8px;min-height:32px;color:var(--ink-2)}
+.film.hl{border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-bg),var(--shadow)}
 h3{font:600 14px/1 Oswald,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-3);margin:32px 0 12px;display:flex;align-items:center;gap:12px}
 h3::after{content:"";flex:1;height:1px;background:var(--line)}
 .empty{padding:32px;text-align:center;color:var(--ink-3);border:1px dashed var(--line);border-radius:6px}
@@ -160,7 +163,9 @@ footer p{margin:0}
 @media (max-width:600px){
   .film{grid-template-columns:20px 56px 1fr;gap:0 10px;padding:10px}
   .poster{width:56px} .rank{font-size:16px}
-  .rating{grid-column:1/-1;flex-direction:row;gap:10px;margin-top:10px;padding:8px 12px;justify-content:flex-start}
+  .film .side{grid-column:1/-1;flex-direction:row;margin-top:10px;align-items:center}
+  .film .side .rating{flex:1}
+  .rating{flex-direction:row;gap:10px;padding:8px 12px;justify-content:flex-start}
   .rating .num{font-size:24px;margin:0}
   .hero{grid-template-columns:84px 1fr;gap:12px;padding:14px}
   .hero .poster{width:84px} .hero h2{font-size:24px}
@@ -243,6 +248,7 @@ const MIN_VOTES = 100;    // below this an IMDb score is noise, not a rating
 const weighted = i => (i.votes / (i.votes + M)) * i.rating + (M / (i.votes + M)) * C;
 const hasRating = m => m.imdb?.rating != null && m.imdb.votes >= MIN_VOTES;
 const isUaPrint = m => /\s-\s*UA$/i.test(m.title);
+const filmKey = m => m.imdb?.id ?? m.id;
 const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 const fmtVotes = n => n.toLocaleString('pl-PL').replace(/\u00a0/g, ' ');
 const hhmm = iso => iso.slice(11, 16);
@@ -259,6 +265,7 @@ let cinemaId = null;
 try { cinemaId = localStorage.getItem('nacodokina.cinema'); } catch {}
 // a shared link (/k/<slug> → /?kino=<slug>) wins over the remembered cinema
 const wanted = new URLSearchParams(location.search).get('kino');
+let highlight = new URLSearchParams(location.search).get('film');
 if (wanted) {
   const hit = Object.values(DATA.cinemas).find(c => c.slug === wanted);
   if (hit) { cinemaId = hit.id; try { localStorage.setItem('nacodokina.cinema', hit.id); } catch {} }
@@ -369,6 +376,7 @@ function render() {
   document.title = `Na co do kina · ${c.city}`;
 
   const from = $('#from').value, to = $('#to').value, lang = $('#lang').value;
+  const dayWord = day === DATA.days[0] ? 'dziś' : day === DATA.days[1] ? 'jutro' : dayLabelFor(day).split(',')[0];
   $('#duo').setAttribute('aria-pressed', duo);
   $('#legend-what').textContent = duo ? 'pary = dwa sąsiednie fotele w dobrej strefie (środek sali, tylne rzędy)' : 'dobre miejsca = środek sali, tylne rzędy';
   const cutoff = from === 'now' ? (day === DATA.days[0] ? Date.now() : 0) : new Date(`${day}T${from}:00+02:00`).getTime();
@@ -410,7 +418,6 @@ function render() {
     const g = best.seats ? goodOf(best.seats) : null;
     const why = [`<b>${im.rating.toFixed(1)}</b> na IMDb`, `seans o <b>${hhmm(best.start)}</b>${until ? ` (${until})` : ''}, koniec ${hhmm(best.end)}`,
       g >= 1 ? (duo ? `<b>${g}</b> ${plural(g, 'para', 'pary', 'par')} obok siebie w dobrej strefie` : `<b>${g}</b> ${plural(g, 'dobre miejsce', 'dobre miejsca', 'dobrych miejsc')} jeszcze wolne`) : ''].filter(Boolean);
-    const dayWord = day === DATA.days[0] ? 'dziś' : day === DATA.days[1] ? 'jutro' : dayLabelFor(day).split(',')[0];
     return `<div class="poster">${m.poster ? `<img src="${esc(m.poster)}" alt="">` : ''}</div>
       <div class="body">
         <div class="top"><div><p class="lbl">Typ na ${dayWord} · ${esc(c.city)}</p><h2>${esc(m.title)}</h2>${m.originalTitle && m.originalTitle !== m.title ? `<p class="orig">${esc(m.originalTitle)}</p>` : ''}</div>${ratingHtml(m)}</div>
@@ -424,7 +431,11 @@ function render() {
   $('#hero').innerHTML = pick ? heroHtml(pick) : '';
   $('#hero').hidden = !pick;
 
-  const row = (f, i, dim) => `<li class="film${dim ? ' film-dim' : ''}">
+  const shareText = (f, s) => {
+    const m = f.m, g = s.seats ? goodOf(s.seats) : null;
+    return `${m.title}${hasRating(m) ? ` — ${m.imdb.rating.toFixed(1)} na IMDb` : ''}, ${dayWord} ${f.shows.map(x => hhmm(x.start)).join(', ')} · ${c.city} (${cinemaLabel(c)})${g >= 1 ? (duo ? `, ${g} ${plural(g, 'para', 'pary', 'par')} dobrych miejsc obok siebie o ${hhmm(s.start)}` : `, ${g} ${plural(g, 'dobre miejsce wolne', 'dobre miejsca wolne', 'dobrych miejsc wolnych')} o ${hhmm(s.start)}`) : ''}`;
+  };
+  const row = (f, i, dim) => `<li class="film${dim ? ' film-dim' : ''}${filmKey(f.m) === highlight ? ' hl' : ''}" id="film-${filmKey(f.m)}">
       <div class="rank">${i}</div>
       <div class="poster">${f.m.poster ? `<img src="${esc(f.m.poster)}" alt="" loading="lazy">` : ''}</div>
       <div class="body">
@@ -433,7 +444,7 @@ function render() {
         ${metaHtml(f.m)}
         <ul class="chips">${f.shows.map(chipHtml).join('')}</ul>
       </div>
-      ${ratingHtml(f.m)}
+      <div class="side">${ratingHtml(f.m)}<button type="button" class="sharebtn" data-share="${f.m.imdb?.id ?? f.m.id}" data-text="${esc(shareText(f, f.shows[0]))}">Wyślij znajomym</button></div>
     </li>`;
   $('#list').innerHTML = rated.length ? rated.map((f, i) => row(f, i + 1, false)).join('') : `<li class="empty">Nic nie gra po wybranej godzinie w tym kinie.</li>`;
   $('#unrated').innerHTML = unrated.length ? `<h3>Bez wiarygodnej oceny</h3><ol class="films">${unrated.map((f, i) => row(f, rated.length + i + 1, true)).join('')}</ol>` : '';
@@ -446,9 +457,9 @@ $('#duo').addEventListener('click', () => { duo = !duo; try { localStorage.setIt
 
 // share the pick: native sheet on phones, clipboard elsewhere
 document.addEventListener('click', async e => {
-  const b = e.target.closest('#share'); if (!b) return;
+  const b = e.target.closest('#share, [data-share]'); if (!b) return;
   const c = DATA.cinemas[cinemaId];
-  const url = `https://nacodokina.pl/k/${c.slug}`;
+  const url = b.dataset.share && day === DATA.days[0] ? `https://nacodokina.pl/k/${c.slug}/${b.dataset.share}` : `https://nacodokina.pl/k/${c.slug}`;
   const text = b.dataset.text;
   if (navigator.share) { try { await navigator.share({ title: 'Na co do kina', text, url }); } catch {} return; }
   try { await navigator.clipboard.writeText(`${text}\n${url}`); setStatus('Skopiowano do schowka — wklej znajomym.'); }
@@ -481,6 +492,7 @@ $('#refresh').addEventListener('click', async () => {
 });
 
 render();
+if (highlight) { const el = document.getElementById(`film-${highlight}`); if (el) setTimeout(() => el.scrollIntoView({ block: 'center', behavior: 'smooth' }), 300); }
 </script>
 </body>
 </html>

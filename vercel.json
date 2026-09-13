@@ -8,6 +8,10 @@
       "includeFiles": "{public/picks.json,fonts/**,node_modules/harfbuzzjs/hb.wasm,node_modules/satori/yoga.wasm}",
       "memory": 1024,
       "maxDuration": 10
+    },
+    "api/share.js": {
+      "includeFiles": "public/picks.json",
+      "maxDuration": 5
     }
   },
   "headers": [
@@ -41,6 +45,12 @@
           "value": "public, max-age=300"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/k/:slug/:film",
+      "destination": "/api/share?k=:slug&f=:film"
     }
   ]
 }

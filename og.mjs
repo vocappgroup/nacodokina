@@ -22,13 +22,13 @@ export async function renderOg(entry) {
   const seatLine = p?.good != null ? (p.good >= 1 ? `${p.good} ${plural(p.good, 'dobre miejsce', 'dobre miejsca', 'dobrych miejsc')} jeszcze wolne` : 'zostały tylko boki') : null;
 
   const body = p ? h('div', { display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'center', gap: 18 },
-      h('div', { display: 'flex', fontFamily: 'Plex', fontWeight: 500, fontSize: 22, letterSpacing: 3, color: gold, textTransform: 'uppercase' }, `Typ na ${dayWord} · ${entry.city}`),
+      h('div', { display: 'flex', fontFamily: 'Plex', fontWeight: 500, fontSize: 22, letterSpacing: 3, color: gold, textTransform: 'uppercase' }, entry.label ?? `Typ na ${dayWord} · ${entry.city}`),
       h('div', { display: 'flex', fontFamily: 'Oswald', fontSize: p.title.length > 22 ? 64 : 80, lineHeight: 1, color: ink }, p.title),
       p.orig && p.orig !== p.title ? h('div', { display: 'flex', fontFamily: 'Plex', fontSize: 28, color: ink2, fontStyle: 'italic' }, p.orig) : null,
       h('div', { display: 'flex', alignItems: 'center', gap: 22, marginTop: 8 },
-        h('div', { display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#2E2610', color: '#F4D27A', borderRadius: 12, padding: '14px 22px' },
+        p.rating != null ? h('div', { display: 'flex', flexDirection: 'column', alignItems: 'center', background: '#2E2610', color: '#F4D27A', borderRadius: 12, padding: '14px 22px' },
           h('div', { display: 'flex', fontFamily: 'Plex', fontSize: 16, letterSpacing: 3, fontWeight: 500 }, 'IMDb'),
-          h('div', { display: 'flex', fontFamily: 'Oswald', fontSize: 56, lineHeight: 1 }, p.rating.toFixed(1))),
+          h('div', { display: 'flex', fontFamily: 'Oswald', fontSize: 56, lineHeight: 1 }, p.rating.toFixed(1))) : null,
         h('div', { display: 'flex', flexDirection: 'column', gap: 6, fontFamily: 'Plex', fontSize: 28, color: ink2 },
           h('div', { display: 'flex', gap: 12, alignItems: 'baseline' }, h('span', { fontFamily: 'Oswald', fontSize: 44, color: ink }, p.time), h('span', {}, `· ${p.ver}`)),
           seatLine ? h('div', { display: 'flex', alignItems: 'center', gap: 10, color: p.good >= 6 ? '#5CCB8A' : p.good >= 1 ? gold : '#E27272' }, h('div', { width: 14, height: 14, borderRadius: 7, background: p.good >= 6 ? '#5CCB8A' : p.good >= 1 ? gold : '#E27272' }), seatLine) : null)))
@@ -45,7 +45,7 @@ export async function renderOg(entry) {
         h('div', { display: 'flex', flexDirection: 'column', gap: 4 },
           h('div', { display: 'flex', fontFamily: 'Oswald', fontSize: 34, color: ink, letterSpacing: 1 }, 'NA CO DO KINA'),
           h('div', { display: 'flex', fontFamily: 'Plex', fontSize: 20, color: ink3 }, `Helios ${entry.cinema}, ${entry.city}`)),
-        h('div', { display: 'flex', fontFamily: 'Plex', fontSize: 22, color: ink3 }, `nacodokina.pl/k/${entry.slug}`))));
+        h('div', { display: 'flex', fontFamily: 'Plex', fontSize: 22, color: ink3 }, entry.url ?? `nacodokina.pl/k/${entry.slug}`))));
 
   const svg = await satori(tree, { width: 1200, height: 630, fonts: await fonts() });
   return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();
