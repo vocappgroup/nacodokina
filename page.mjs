@@ -1,13 +1,13 @@
 // The page template. build.mjs feeds it the compacted data and writes public/index.html.
-export const page = ({ data, dayLabel, timeLabel, dayTabs }) => `<!doctype html>
+export const page = ({ data, dayLabel, timeLabel, dayTabs, cityCount, cinemaCount }) => `<!doctype html>
 <html lang="pl">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Na co do kina — repertuar Helios wg ocen IMDb i wolnych dobrych miejsc</title>
-<meta name="description" content="Wszystkie kina Helios w Polsce: filmy grane dziś, jutro i pojutrze posortowane wg oceny IMDb, przy każdej godzinie liczba wolnych dobrych miejsc.">
+<title>Na co do kina — co warto obejrzeć dziś w Twoim kinie</title>
+<meta name="description" content="Filmy grane dziś, jutro i pojutrze w Twoim kinie, posortowane wg oceny IMDb — przy każdej godzinie liczba wolnych dobrych miejsc. Kina w ${cityCount} miastach.">
 <meta property="og:title" content="Na co do kina">
-<meta property="og:description" content="Repertuar Helios posortowany po ocenach IMDb + wolne dobre miejsca przy każdej godzinie.">
+<meta property="og:description" content="Repertuar Twojego kina posortowany po ocenach IMDb + wolne dobre miejsca przy każdej godzinie.">
 <meta property="og:image" content="https://nacodokina.pl/og.png">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nacodokina.pl/">
@@ -156,6 +156,7 @@ dialog::backdrop{background:rgba(0,0,0,.45)}
 .pick-list button.sub .c{font-weight:500}
 .pick-list button[aria-current="true"]{background:var(--gold-bg);color:var(--gold-ink)}
 .pick-list button.near{color:var(--gold-ink);font-weight:600}
+.pick-list a.missing{display:block;padding:14px 16px 6px;font-size:13.5px;color:var(--ink-3);text-decoration:none;border-top:1px solid var(--line);margin-top:6px} .pick-list a.missing b{color:var(--ink-2)}
 
 footer{margin-top:40px;padding-top:16px;border-top:1px solid var(--line);color:var(--ink-3);font-size:12.5px;display:grid;gap:8px}
 footer dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:3px 12px}
@@ -183,7 +184,7 @@ footer p{margin:0}
 <body>
 <div class="wrap">
 <header>
-  <p class="eyebrow">Helios · cała Polska · strona nieoficjalna</p>
+  <p class="eyebrow">Twoje kino · ${cityCount} miast</p>
   <div class="titlerow">
     <h1>Na co do kina<small id="daylabel">${dayLabel}</small></h1>
     <button type="button" class="cinemabtn" id="cinemabtn" hidden><span><span class="c" id="cb-city"></span><span class="n" id="cb-name"></span></span><span class="arr">▼</span></button>
@@ -193,8 +194,8 @@ footer p{margin:0}
 
 <section class="welcome" id="welcome" hidden>
   <h2>Gdzie idziesz do kina?</h2>
-  <p>Pokażemy, na co warto — filmy w Twoim Heliosie posortowane po ocenach, z wolnymi dobrymi miejscami przy każdej godzinie.</p>
-  <div class="btns"><button type="button" class="primary" id="near-welcome">📍 Znajdź najbliższy Helios</button><button type="button" id="pick-welcome">Wybierz z listy</button></div>
+  <p>Pokażemy, na co warto — filmy w Twoim kinie posortowane po ocenach, z wolnymi dobrymi miejscami przy każdej godzinie.</p>
+  <div class="btns"><button type="button" class="primary" id="near-welcome">📍 Znajdź najbliższe kino</button><button type="button" id="pick-welcome">Wybierz z listy</button></div>
   <p class="status" id="status-welcome"></p>
 </section>
 
@@ -231,7 +232,7 @@ footer p{margin:0}
     <dt>miejsca</dt><dd>wolne fotele w „dobrej strefie": tylne-środkowe rzędy, środkowe 40 % rzędu, liczone z planu sali i listy zajętych foteli. Pasek pokazuje, jaka część dobrej strefy jest jeszcze wolna. Migawka z ${timeLabel} dla dzisiejszych seansów; „Odśwież miejsca" pobiera aktualny stan dla wybranego dnia</dd>
     <dt>wersja</dt><dd>NAP = polskie napisy, ORG = oryginał bez napisów, DUB = polski dubbing, DUB UA = ukraiński dubbing (fioletowe chipy to dubbing)</dd>
   </dl>
-  <p>Strona nieoficjalna, niezwiązana z Helios S.A. Repertuar, plany sal i zajętość miejsc: Helios. Oceny: IMDb (datasets.imdbws.com). Bilety kupujesz na bilety.helios.pl. Bez cookies i kont — wybrane kino pamięta tylko Twoja przeglądarka. Kontakt: kontakt@nacodokina.pl</p>
+  <p>Na razie obsługujemy sieć Helios (${cinemaCount} w ${cityCount} miastach); Cinema City i Multikino — jak tylko udostępnią dane. Strona nieoficjalna, niezwiązana z Helios S.A. Repertuar, plany sal i zajętość miejsc: Helios. Oceny: IMDb (datasets.imdbws.com). Bilety kupujesz na bilety.helios.pl. Bez cookies i kont — wybrane kino pamięta tylko Twoja przeglądarka. Kontakt: kontakt@nacodokina.pl</p>
 </footer>
 </div>
 <script>
@@ -282,7 +283,7 @@ const cinemas = Object.values(DATA.cinemas).filter(c => DATA.screenings.some(s =
 const byCity = {};
 for (const c of cinemas) (byCity[c.city] ??= []).push(c);
 const cities = Object.keys(byCity).sort((a, b) => a.localeCompare(b, 'pl'));
-const cinemaLabel = c => c.name.toUpperCase() === c.city.toUpperCase() ? 'Helios' : \`Helios \${c.name}\`;
+const cinemaLabel = c => c.name.toUpperCase() === c.city.toUpperCase() ? 'Helios' : c.name;
 
 // ---------- seats ----------
 let duo = false;
@@ -331,6 +332,7 @@ const renderPicker = (q = '') => {
         rows.push(\`<li><button type="button" class="sub" data-id="\${c.id}" aria-current="\${c.id === cinemaId}"><span class="c">\${esc(cinemaLabel(c))}</span><span class="n">\${esc(c.street.replace(/\\s*\\d{2}-\\d{3}.*$/, ''))}</span></button></li>\`);
     }
   }
+  rows.push(\`<li><a class="missing" href="mailto:kontakt@nacodokina.pl?subject=\${encodeURIComponent('Chcę moje kino na nacodokina.pl')}&body=\${encodeURIComponent('Miasto: \\nKino / sieć: \\n')}">Nie ma Twojego kina? <b>Daj znać, które</b> — dodamy, gdy tylko się da.</a></li>\`);
   pickList.innerHTML = rows.join('');
 };
 const openPicker = () => { renderPicker(''); pickSearch.value = ''; picker.showModal(); setTimeout(() => pickSearch.focus(), 50); };
@@ -357,7 +359,7 @@ const dist = (a, b, c, d) => { const r = Math.PI / 180, x = (c - a) * r, y = (d 
 const setStatus = t => { $('#status').textContent = t; $('#status-welcome').textContent = t; };
 const locate = () => {
   if (!navigator.geolocation) { setStatus('Przeglądarka nie udostępnia lokalizacji — wybierz kino z listy.'); return; }
-  setStatus('Szukam najbliższego Heliosa…');
+  setStatus('Szukam najbliższego kina…');
   navigator.geolocation.getCurrentPosition(p => {
     const best = cinemas.map(c => ({ c, km: dist(p.coords.latitude, p.coords.longitude, c.lat, c.lon) })).sort((a, b) => a.km - b.km)[0];
     chooseCinema(best.c.id);

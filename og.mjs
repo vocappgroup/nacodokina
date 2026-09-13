@@ -41,7 +41,7 @@ export async function renderOg(entry) {
   if (!p) {
     const generic = h('div', { display: 'flex', flexDirection: 'column', width: '100%', height: '100%', background: bg, padding: 64, justifyContent: 'space-between', fontFamily: 'Plex' },
       h('div', { display: 'flex', flexDirection: 'column', gap: 22 },
-        h('div', { display: 'flex', fontFamily: 'Plex', fontWeight: 500, fontSize: 24, letterSpacing: 4, color: gold, textTransform: 'uppercase' }, `Helios · ${entry.city}`),
+        h('div', { display: 'flex', fontFamily: 'Plex', fontWeight: 500, fontSize: 24, letterSpacing: 4, color: gold, textTransform: 'uppercase' }, entry.city),
         h('div', { display: 'flex', fontFamily: 'Oswald', fontSize: 132, lineHeight: 1, color: ink, letterSpacing: 2 }, 'NA CO DO KINA'),
         h('div', { display: 'flex', flexDirection: 'column', gap: 12, fontFamily: 'Plex', fontSize: 34, color: ink2, marginTop: 10 },
           h('div', { display: 'flex', gap: 14, alignItems: 'center' }, h('div', { width: 14, height: 14, borderRadius: 7, background: gold }), 'repertuar posortowany po ocenach IMDb'),
@@ -56,11 +56,9 @@ export async function renderOg(entry) {
     p?.poster ? { type: 'img', props: { src: p.poster, width: 356, height: 534, style: { objectFit: 'cover', borderRadius: 10, background: surface } } } : h('div', { width: 356, height: 534, borderRadius: 10, background: surface }),
     h('div', { display: 'flex', flexDirection: 'column', flexGrow: 1, justifyContent: 'space-between' },
       body,
-      h('div', { display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end' },
-        h('div', { display: 'flex', flexDirection: 'column', gap: 4 },
-          h('div', { display: 'flex', fontFamily: 'Oswald', fontSize: 34, color: ink, letterSpacing: 1 }, 'NA CO DO KINA'),
-          h('div', { display: 'flex', fontFamily: 'Plex', fontSize: 20, color: ink3 }, `Helios ${entry.cinema}, ${entry.city}`)),
-        h('div', { display: 'flex', fontFamily: 'Plex', fontSize: 22, color: ink3 }, entry.url ?? `nacodokina.pl/k/${entry.slug}`))));
+      h('div', { display: 'flex', flexDirection: 'column', gap: 4 },
+        h('div', { display: 'flex', fontFamily: 'Oswald', fontSize: 34, color: ink, letterSpacing: 1 }, 'NA CO DO KINA'),
+        h('div', { display: 'flex', fontFamily: 'Plex', fontSize: 20, color: ink3 }, `${entry.cinema.toUpperCase() === entry.city.toUpperCase() ? 'Helios' : entry.cinema}, ${entry.city}  ·  ${entry.url ?? `nacodokina.pl/k/${entry.slug}`}`))));
 
   const svg = await satori(tree, { width: 1200, height: 630, fonts: await fonts() });
   return new Resvg(svg, { fitTo: { mode: 'width', value: 1200 } }).render().asPng();

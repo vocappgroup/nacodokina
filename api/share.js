@@ -13,7 +13,7 @@ export default async function handler(req, res) {
   const film = entry?.films?.[f];
   const target = `/?kino=${encodeURIComponent(k)}${f ? `&film=${encodeURIComponent(f)}` : ''}`;
   if (!entry || !film) { res.status(302).setHeader('location', entry ? `/k/${k}` : '/').send(''); return; }
-  const cinemaName = entry.cinema.toUpperCase() === entry.city.toUpperCase() ? `Helios ${entry.city}` : `Helios ${entry.cinema}, ${entry.city}`;
+  const cinemaName = entry.cinema.toUpperCase() === entry.city.toUpperCase() ? `Helios ${entry.city}` : `${entry.cinema}, ${entry.city}`;
   const seats = film.good != null && film.good >= 1 ? `, ${film.good} ${plural(film.good, 'dobre miejsce wolne', 'dobre miejsca wolne', 'dobrych miejsc wolnych')}` : '';
   const title = `${film.title}${film.rating != null ? ` ${film.rating.toFixed(1)}` : ''} · dziś ${film.time} · ${cinemaName}`;
   const desc = `${film.rating != null ? `${film.rating.toFixed(1)} na IMDb, ` : ''}seanse: ${film.times.join(', ')}${seats}. Bilety na bilety.helios.pl.`;

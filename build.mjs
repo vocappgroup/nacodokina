@@ -88,10 +88,10 @@ const esc = s => String(s ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '
 const v = generated.toISOString().slice(0, 16).replace(/\D/g, '');
 for (const e of Object.values(picks.cinemas)) {
   const p = e.pick;
-  const cinemaName = e.cinema.toUpperCase() === e.city.toUpperCase() ? `Helios ${e.city}` : `Helios ${e.cinema}, ${e.city}`;
+  const cinemaName = e.cinema.toUpperCase() === e.city.toUpperCase() ? `Helios ${e.city}` : `${e.cinema}, ${e.city}`;
   const seats = p?.good != null && p.good >= 1 ? `, ${p.good} ${plural(p.good, 'dobre miejsce wolne', 'dobre miejsca wolne', 'dobrych miejsc wolnych')}` : '';
   const title = p ? `Dziś · ${cinemaName}: ${p.title} ${p.rating.toFixed(1)}, ${p.time}` : `Na co do kina · ${cinemaName}`;
-  const desc = p ? `${p.title} — ${p.rating.toFixed(1)} na IMDb, seans o ${p.time}${seats}. Cały repertuar ${cinemaName} posortowany po ocenach.` : `Repertuar ${cinemaName} posortowany po ocenach IMDb, z wolnymi dobrymi miejscami przy każdej godzinie.`;
+  const desc = p ? `${p.title} — ${p.rating.toFixed(1)} na IMDb, seans o ${p.time}${seats}. Cały repertuar ${cinemaName} posortowany po ocenach.` : `Repertuar kina ${cinemaName} posortowany po ocenach IMDb, z wolnymi dobrymi miejscami przy każdej godzinie.`;
   const url = `https://nacodokina.pl/k/${e.slug}`;
   await writeFile(new URL(`./k/${e.slug}.html`, out), `<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title><meta name="description" content="${esc(desc)}">
@@ -103,6 +103,7 @@ for (const e of Object.values(picks.cinemas)) {
 `);
 }
 await writeFile(new URL('./picks.json', out), JSON.stringify(picks));
-const html = page({ data, dayLabel, timeLabel, dayTabs });
+const cityCount = new Set(Object.values(raw.cinemas).map(c => c.city)).size, n = Object.keys(raw.cinemas).length, cinemaCount = `${n} ${plural(n, 'kino', 'kina', 'kin')}`;
+const html = page({ data, dayLabel, timeLabel, dayTabs, cityCount, cinemaCount });
 await writeFile(new URL('./index.html', out), html);
 console.error(`public/index.html: ${(html.length / 1024).toFixed(0)} KB · picks.json: ${Object.values(picks.cinemas).filter(e => e.pick).length}/${Object.keys(picks.cinemas).length} cinemas with a pick · k/: ${Object.keys(picks.cinemas).length} share pages`);
