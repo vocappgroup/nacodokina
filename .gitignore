@@ -1,5 +1,4 @@
 .cache/
 data.json
-public/index.html
 node_modules/
 .vercel/

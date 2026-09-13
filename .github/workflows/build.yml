@@ -1,4 +1,5 @@
-# Rebuilds the site every 30 minutes between 06:00 and 23:00 Warsaw time and deploys it to Vercel.
+# Rebuilds the site every 30 minutes between 06:00 and 23:00 Warsaw time and commits public/index.html;
+# Vercel's Git integration deploys every push to main.
 # One run ≈ 700 requests to restapi.helios.pl (repertoire + today's seat occupancy).
 name: build
 on:
@@ -21,14 +22,9 @@ jobs:
       - run: node fetch.mjs
         env: { TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }} }
       - run: node build.mjs
-      - name: keep newly matched films in the cache
+      - name: commit the built page (Vercel deploys on push)
         run: |
           git config user.name  "nacodokina-bot"
           git config user.email "kontakt@nacodokina.pl"
-          git add imdb-cache.json
-          git diff --cached --quiet || git commit -m "imdb-cache: new films" && git push
-      - run: npx vercel@latest deploy --prod --yes --token "$VERCEL_TOKEN"
-        env:
-          VERCEL_TOKEN: ${{ secrets.VERCEL_TOKEN }}
-          VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
-          VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+          git add imdb-cache.json public/index.html
+          git diff --cached --quiet || (git commit -m "build $(TZ=Europe/Warsaw date '+%Y-%m-%d %H:%M')" && git push)

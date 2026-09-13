@@ -20,7 +20,8 @@ node build.mjs   # data.json → public/index.html (jedna statyczna strona z osa
 
 ## Deploy
 
-GitHub Actions (`.github/workflows/build.yml`) co 30 min 06:00–23:00 → Vercel. Sekrety:
-`TMDB_API_KEY`, `VERCEL_TOKEN`, `VERCEL_ORG_ID`, `VERCEL_PROJECT_ID`.
+GitHub Actions (`.github/workflows/build.yml`) co 30 min 06:00–23:00 buduje stronę i commituje
+`public/index.html`; Vercel (integracja z GitHubem, Root Directory = `public`) wdraża każdy push.
+Jedyny sekret: `TMDB_API_KEY`. Actions muszą mieć uprawnienie „Read and write" do repo (Settings → Actions → General).
 
 Lokalnie: `npx serve public`.
