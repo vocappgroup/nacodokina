@@ -1,0 +1,18 @@
+{
+  "name": "nacodokina",
+  "private": true,
+  "type": "module",
+  "description": "Repertuar Helios posortowany po ocenach IMDb, z wolnymi dobrymi miejscami",
+  "repository": "github:vocappgroup/nacodokina",
+  "license": "MIT",
+  "engines": { "node": ">=22" },
+  "scripts": {
+    "fetch": "node fetch.mjs",
+    "build": "node build.mjs",
+    "og": "node og.mjs"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "^2.6.2",
+    "satori": "^0.33.4"
+  }
+}

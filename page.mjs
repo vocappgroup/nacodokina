@@ -84,6 +84,7 @@ button.gold{background:var(--gold-bg);color:var(--gold-ink);border-color:transpa
 .hero .buy{display:inline-flex;align-items:center;gap:10px;white-space:nowrap;background:var(--ink);color:var(--bg);border-radius:6px;padding:10px 16px;text-decoration:none;font-weight:600;min-height:44px}
 .hero .buy b{font:600 20px/1 Oswald,sans-serif;letter-spacing:.02em}
 .hero .more{color:var(--ink-3);font-size:13px}
+.hero .share{min-height:44px;padding:0 14px}
 .hero .top{display:flex;justify-content:space-between;gap:12px;align-items:start}
 
 /* filters */
@@ -166,7 +167,7 @@ footer p{margin:0}
   .hero .rating{grid-column:auto;flex-direction:column;margin:0;padding:8px}
   .days button{flex:1;min-width:0}
   .controls select{flex:1 1 40%;min-width:0} .controls #refresh{flex:1 1 100%}
-  .hero .cta .buy{width:100%;justify-content:center}
+  .hero .cta .buy{width:100%;justify-content:center} .hero .cta .share{width:100%}
   .hero .lbl{font-size:10px}
   .chip{flex:1 1 calc(50% - 4px);min-width:0}
 }
@@ -251,7 +252,16 @@ const untilText = start => {
 let day = DATA.days[0];
 let cinemaId = null;
 try { cinemaId = localStorage.getItem('nacodokina.cinema'); } catch {}
+// a shared link (/k/<slug> → /?kino=<slug>) wins over the remembered cinema
+const wanted = new URLSearchParams(location.search).get('kino');
+if (wanted) {
+  const hit = Object.values(DATA.cinemas).find(c => c.slug === wanted);
+  if (hit) { cinemaId = hit.id; try { localStorage.setItem('nacodokina.cinema', hit.id); } catch {} }
+  history.replaceState(null, '', location.pathname);
+}
 if (cinemaId && !DATA.cinemas[cinemaId]) cinemaId = null;
+try { const f = localStorage.getItem('nacodokina.from'); if (f) document.querySelector('#from').value = f; } catch {}
+try { const l = localStorage.getItem('nacodokina.lang'); if (l) document.querySelector('#lang').value = l; } catch {}
 
 const cinemas = Object.values(DATA.cinemas).filter(c => DATA.screenings.some(s => s.cinemaId === c.id));
 const byCity = {};
@@ -384,7 +394,7 @@ function render() {
         <div class="top"><div><p class="lbl">Typ na \${dayWord} · \${esc(c.city)}</p><h2>\${esc(m.title)}</h2>\${m.originalTitle && m.originalTitle !== m.title ? \`<p class="orig">\${esc(m.originalTitle)}</p>\` : ''}</div>\${ratingHtml(m)}</div>
         \${metaHtml(m)}
         <p class="why">Bo \${why.join(', ')}.</p>
-        <div class="cta"><a class="buy" href="\${best.ticketUrl}" target="_blank" rel="noopener">Kup bilet na <b>\${hhmm(best.start)}</b> · \${verOf(best)}</a>\${others.length ? \`<span class="more">inne godziny: \${others.map(s => hhmm(s.start)).join(', ')}</span>\` : ''}</div>
+        <div class="cta"><a class="buy" href="\${best.ticketUrl}" target="_blank" rel="noopener">Kup bilet na <b>\${hhmm(best.start)}</b> · \${verOf(best)}</a><button type="button" class="share" id="share" data-text="\${esc(\`Na co do kina \${dayWord} · \${cinemaLabel(c)} \${c.city}: \${m.title} — \${im.rating.toFixed(1)} na IMDb, seans o \${hhmm(best.start)}\${best.seats && best.seats.good >= 1 ? \`, \${best.seats.good} \${plural(best.seats.good, 'dobre miejsce wolne', 'dobre miejsca wolne', 'dobrych miejsc wolnych')}\` : ''}\`)}">Wyślij znajomym</button>\${others.length ? \`<span class="more">inne godziny: \${others.map(s => hhmm(s.start)).join(', ')}</span>\` : ''}</div>
       </div>\`;
   }
   // the answer: best film that still has a seat worth sitting in (unknown seats count as fine)
@@ -407,8 +417,19 @@ function render() {
   $('#unrated').innerHTML = unrated.length ? \`<h3>Bez wiarygodnej oceny</h3><ol class="films">\${unrated.map((f, i) => row(f, rated.length + i + 1, true)).join('')}</ol>\` : '';
 }
 
-$('#from').addEventListener('change', render);
-$('#lang').addEventListener('change', render);
+$('#from').addEventListener('change', () => { try { localStorage.setItem('nacodokina.from', $('#from').value); } catch {} render(); });
+$('#lang').addEventListener('change', () => { try { localStorage.setItem('nacodokina.lang', $('#lang').value); } catch {} render(); });
+
+// share the pick: native sheet on phones, clipboard elsewhere
+document.addEventListener('click', async e => {
+  const b = e.target.closest('#share'); if (!b) return;
+  const c = DATA.cinemas[cinemaId];
+  const url = \`https://nacodokina.pl/k/\${c.slug}\`;
+  const text = b.dataset.text;
+  if (navigator.share) { try { await navigator.share({ title: 'Na co do kina', text, url }); } catch {} return; }
+  try { await navigator.clipboard.writeText(\`\${text}\\n\${url}\`); setStatus('Skopiowano do schowka — wklej znajomym.'); }
+  catch { setStatus(url); }
+});
 $('#days').addEventListener('click', e => {
   const b = e.target.closest('button[data-day]'); if (!b) return;
   day = b.dataset.day;
