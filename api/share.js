@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 <meta property="og:type" content="website"><meta property="og:url" content="https://nacodokina.pl/k/${k}/${f}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}">
 <meta property="og:image" content="${img}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="pl_PL">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="${img}">
-<meta http-equiv="refresh" content="0; url=${target}">
+<script>location.replace("${target}")</script>
 </head><body style="font-family:system-ui;padding:24px;background:#101318;color:#E8EAF0"><p>${esc(title)}</p><p><a href="${target}" style="color:#E3B341">Zobacz seanse →</a></p></body></html>
 `);
 }

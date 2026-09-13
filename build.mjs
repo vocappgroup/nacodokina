@@ -98,7 +98,7 @@ for (const e of Object.values(picks.cinemas)) {
 <meta property="og:type" content="website"><meta property="og:url" content="${url}"><meta property="og:title" content="${esc(title)}"><meta property="og:description" content="${esc(desc)}">
 <meta property="og:image" content="https://nacodokina.pl/api/og?k=${e.slug}&v=${v}"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:locale" content="pl_PL">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="${esc(title)}"><meta name="twitter:description" content="${esc(desc)}"><meta name="twitter:image" content="https://nacodokina.pl/api/og?k=${e.slug}&v=${v}">
-<meta http-equiv="refresh" content="0; url=/?kino=${e.slug}"><link rel="canonical" href="${url}">
+<script>location.replace("/?kino=${e.slug}")</script><link rel="canonical" href="${url}">
 </head><body style="font-family:system-ui;padding:24px;background:#101318;color:#E8EAF0"><p>${esc(title)}</p><p><a href="/?kino=${e.slug}" style="color:#E3B341">Zobacz cały repertuar →</a></p></body></html>
 `);
 }
