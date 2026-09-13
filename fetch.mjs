@@ -159,7 +159,17 @@ await pool(cinemaIdsUsed, async cid => {
       const n = rs.length, from = Math.floor(n * 0.3), to = Math.ceil(n * 0.7);
       rs.slice(from, to).forEach(s => zone.add(s.id));
     }
-    screens[sc.id] = { id: sc.id, cinemaId: cid, name: sc.name.trim(), feature: sc.feature || null, total: seats.length, zone: [...zone] };
+    // pairs of side-by-side seats inside the zone, as index pairs into `zone` (for "we dwoje")
+    const zoneArr = [...zone];
+    const idx = new Map(zoneArr.map((id, i) => [id, i]));
+    const at = new Map(seats.map(s => [`${s.coordinateY}:${s.coordinateX}`, s.id]));
+    const pairs = [];
+    for (const s of seats) {
+      if (!idx.has(s.id)) continue;
+      const right = at.get(`${s.coordinateY}:${s.coordinateX + 1}`);
+      if (right && idx.has(right)) pairs.push([idx.get(s.id), idx.get(right)]);
+    }
+    screens[sc.id] = { id: sc.id, cinemaId: cid, name: sc.name.trim(), feature: sc.feature || null, total: seats.length, zone: zoneArr, pairs };
   }
 });
 console.error(`${Object.keys(screens).length} screens`);
@@ -178,6 +188,7 @@ await pool(upcoming, async s => {
 const seatStats = (screen, taken) => ({
   free: screen.total - taken.size, total: screen.total,
   good: screen.zone.filter(id => !taken.has(id)).length, goodTotal: screen.zone.length,
+  pairs: screen.pairs.filter(([a, b]) => !taken.has(screen.zone[a]) && !taken.has(screen.zone[b])).length, pairsTotal: screen.pairs.length,
 });
 
 const screenings = screeningsRaw.filter(s => movies[s.movieId]).map(s => {
@@ -195,6 +206,6 @@ const screenings = screeningsRaw.filter(s => movies[s.movieId]).map(s => {
 await writeFile(new URL('./data.json', import.meta.url), JSON.stringify({
   generatedAt: now.toISOString(), days, cinemas, movies, screenings,
   // just enough of each seat map for the page to recompute free/good seats from a live occupancy call
-  screens: Object.fromEntries(Object.values(screens).map(s => [s.id, { total: s.total, zone: s.zone }])),
+  screens: Object.fromEntries(Object.values(screens).map(s => [s.id, { total: s.total, zone: s.zone, pairs: s.pairs }])),
 }));
 console.error(`data.json: ${screenings.length} screenings, ${Object.keys(movies).length} films, ${Object.keys(occupancy).length} with live seats`);

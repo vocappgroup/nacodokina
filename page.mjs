@@ -90,6 +90,7 @@ button.gold{background:var(--gold-bg);color:var(--gold-ink);border-color:transpa
 /* filters */
 .controls{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 6px}
 .controls select{min-width:150px}
+.controls #duo[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
 .status{font-size:13px;color:var(--ink-3);margin:0 0 12px;min-height:1.2em}
 .legend{display:flex;flex-wrap:wrap;align-items:center;gap:6px 14px;font-size:12.5px;color:var(--ink-3);margin:0 0 12px}
 .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;background:var(--ok);margin-right:5px;vertical-align:-1px}
@@ -166,7 +167,7 @@ footer p{margin:0}
   .hero .poster{width:84px} .hero h2{font-size:24px}
   .hero .rating{grid-column:auto;flex-direction:column;margin:0;padding:8px}
   .days button{flex:1;min-width:0}
-  .controls select{flex:1 1 40%;min-width:0} .controls #refresh{flex:1 1 100%}
+  .controls select{flex:1 1 40%;min-width:0} .controls #refresh,.controls #duo{flex:1 1 45%}
   .hero .cta .buy{width:100%;justify-content:center} .hero .cta .share{width:100%}
   .hero .lbl{font-size:10px}
   .chip{flex:1 1 calc(50% - 4px);min-width:0}
@@ -195,16 +196,20 @@ footer p{margin:0}
 <div id="main" hidden>
   <section class="hero" id="hero"></section>
   <div class="controls">
-    <select id="from" aria-label="Od godziny">
-      <option value="now">od teraz</option><option value="10:00">od 10:00</option><option value="12:00">od 12:00</option><option value="14:00">od 14:00</option><option value="16:00">od 16:00</option><option value="17:00">od 17:00</option><option value="18:00">od 18:00</option><option value="19:00">od 19:00</option><option value="20:00">od 20:00</option><option value="21:00">od 21:00</option>
+    <select id="from" aria-label="Wolny od godziny">
+      <option value="now">wolny od teraz</option><option value="10:00">wolny od 10:00</option><option value="12:00">wolny od 12:00</option><option value="14:00">wolny od 14:00</option><option value="16:00">wolny od 16:00</option><option value="17:00">wolny od 17:00</option><option value="18:00">wolny od 18:00</option><option value="19:00">wolny od 19:00</option><option value="20:00">wolny od 20:00</option><option value="21:00">wolny od 21:00</option>
     </select>
+    <select id="to" aria-label="Muszę wyjść przed">
+      <option value="none">bez limitu</option><option value="20:00">wychodzę przed 20:00</option><option value="21:00">wychodzę przed 21:00</option><option value="22:00">wychodzę przed 22:00</option><option value="22:30">wychodzę przed 22:30</option><option value="23:00">wychodzę przed 23:00</option><option value="23:30">wychodzę przed 23:30</option><option value="00:00">wychodzę przed 00:00</option><option value="00:30">wychodzę przed 00:30</option><option value="01:00">wychodzę przed 01:00</option>
+    </select>
+    <button id="duo" type="button" aria-pressed="false" title="Pokazuj tylko pary sąsiednich dobrych miejsc">👥 We dwoje</button>
     <select id="lang" aria-label="Wersja językowa">
       <option value="all">każda wersja</option><option value="orig">oryginał / napisy</option><option value="dub">dubbing</option>
     </select>
     <button id="refresh" type="button">↻ Odśwież miejsca</button>
   </div>
   <p class="status" id="status"></p>
-  <p class="legend"><span><i></i>dobre miejsca = środek sali, tylne rzędy</span><span><i class="w"></i>kończą się</span><span><i class="b"></i>zostały boki</span><span>liczone z planu sali i aktualnej zajętości</span></p>
+  <p class="legend"><span><i></i><span id="legend-what">dobre miejsca = środek sali, tylne rzędy</span></span><span><i class="w"></i>kończą się</span><span><i class="b"></i>zostały boki</span><span>liczone z planu sali i aktualnej zajętości</span></p>
   <div class="sectionhead"><h3>Wszystkie filmy</h3><span id="summary"></span></div>
   <ol class="films" id="list"></ol>
   <div id="unrated"></div>
@@ -229,7 +234,8 @@ const RAW = ${JSON.stringify(data).replace(/</g, '\\u003c')};
 const DATA = { ...RAW, screenings: RAW.screenings.map(t => ({
   id: t[0], cinemaId: t[1], movieId: t[2], screenId: t[3], day: t[4].slice(0, 10), start: t[4] + ':00+02:00',
   speaking: { D: 'DUB', O: 'ORG', N: 'Napisy' }[t[5]], screenFeature: t[6] || null, print: t[7] === 'I' ? '2D IMAX' : '2D',
-  seats: t[8] ? { free: t[8][0], total: t[8][1], good: t[8][2], goodTotal: t[8][3] } : null,
+  seats: t[8] ? { free: t[8][0], total: t[8][1], good: t[8][2], goodTotal: t[8][3], pairs: t[8][4] ?? 0, pairsTotal: t[8][5] ?? 0 } : null,
+  end: (t[9] ?? t[4]) + ':00+02:00',
   ticketUrl: \`https://bilety.helios.pl/screen/\${t[0]}?cinemaId=\${t[1]}\`,
 })) };
 const $ = s => document.querySelector(s);
@@ -262,6 +268,8 @@ if (wanted) {
 if (cinemaId && !DATA.cinemas[cinemaId]) cinemaId = null;
 try { const f = localStorage.getItem('nacodokina.from'); if (f) document.querySelector('#from').value = f; } catch {}
 try { const l = localStorage.getItem('nacodokina.lang'); if (l) document.querySelector('#lang').value = l; } catch {}
+try { const t = localStorage.getItem('nacodokina.to'); if (t) document.querySelector('#to').value = t; } catch {}
+try { duo = localStorage.getItem('nacodokina.duo') === '1'; } catch {}
 
 const cinemas = Object.values(DATA.cinemas).filter(c => DATA.screenings.some(s => s.cinemaId === c.id));
 const byCity = {};
@@ -270,22 +278,32 @@ const cities = Object.keys(byCity).sort((a, b) => a.localeCompare(b, 'pl'));
 const cinemaLabel = c => c.name.toUpperCase() === c.city.toUpperCase() ? 'Helios' : \`Helios \${c.name}\`;
 
 // ---------- seats ----------
-const seatClass = s => !s ? 'na' : s.good >= 6 ? 'ok' : s.good >= 1 ? 'warn' : 'bad';
+let duo = false;
+// "good" = free seats in the good zone; with "we dwoje" on, it's pairs of side-by-side seats there
+const goodOf = s => duo ? s.pairs : s.good;
+const goodTotalOf = s => duo ? s.pairsTotal : s.goodTotal;
+const seatClass = s => !s ? 'na' : goodOf(s) >= (duo ? 4 : 6) ? 'ok' : goodOf(s) >= 1 ? 'warn' : 'bad';
 const seatText = s => {
   if (!s) return '';
-  if (s.good >= 6) return \`\${s.good} \${plural(s.good, 'dobre miejsce', 'dobre miejsca', 'dobrych miejsc')}\`;
-  if (s.good >= 1) return \`\${s.good === 1 ? 'zostało' : plural(s.good, '', 'zostały', 'zostało')} \${s.good} \${plural(s.good, 'dobre', 'dobre', 'dobrych')}\`;
+  const g = goodOf(s);
+  if (duo) {
+    if (g >= 4) return \`\${g} \${plural(g, 'para', 'pary', 'par')} obok siebie\`;
+    if (g >= 1) return \`\${g === 1 ? 'została' : plural(g, '', 'zostały', 'zostało')} \${g} \${plural(g, 'para', 'pary', 'par')}\`;
+    return s.free > 1 ? 'bez pary w dobrej strefie' : 'wyprzedane';
+  }
+  if (g >= 6) return \`\${g} \${plural(g, 'dobre miejsce', 'dobre miejsca', 'dobrych miejsc')}\`;
+  if (g >= 1) return \`\${g === 1 ? 'zostało' : plural(g, '', 'zostały', 'zostało')} \${g} \${plural(g, 'dobre', 'dobre', 'dobrych')}\`;
   if (s.free > 0) return \`tylko boki (\${s.free} \${plural(s.free, 'wolne', 'wolne', 'wolnych')})\`;
   return 'wyprzedane';
 };
-const seatHtml = s => s ? \`<span class="seat \${seatClass(s)}" title="\${s.free} wolnych z \${s.total}; \${s.good} z \${s.goodTotal} w dobrej strefie"><i style="--p:\${Math.round(100 * s.good / Math.max(1, s.goodTotal))}%"></i>\${seatText(s)}</span>\` : '';
+const seatHtml = s => s ? \`<span class="seat \${seatClass(s)}" title="\${s.free} wolnych z \${s.total}; \${s.good} z \${s.goodTotal} w dobrej strefie, \${s.pairs} par obok siebie"><i style="--p:\${Math.round(100 * goodOf(s) / Math.max(1, goodTotalOf(s)))}%"></i>\${seatText(s)}</span>\` : '';
 
 const verOf = s => s.speaking === 'DUB' ? (isUaPrint(DATA.movies[s.movieId]) ? 'DUB UA' : 'DUB') : s.speaking === 'ORG' ? 'ORG' : 'NAP';
 const chipHtml = s => {
   const ver = verOf(s);
   const tags = [ver, s.screenFeature, s.print === '2D IMAX' ? 'IMAX' : null].filter(Boolean).join(' · ');
-  const until = s.day === DATA.days[0] ? untilText(s.start) : '';
-  return \`<li><a class="chip \${ver.startsWith('DUB') ? 'chip-sub' : ''}" href="\${s.ticketUrl}" target="_blank" rel="noopener"><span class="t"><b>\${hhmm(s.start)}</b><span>\${tags}</span>\${until ? \`<em>\${until}</em>\` : ''}</span>\${seatHtml(s.seats)}</a></li>\`;
+  const until = $('#to').value !== 'none' ? \`do \${hhmm(s.end)}\` : s.day === DATA.days[0] ? untilText(s.start) : '';
+  return \`<li><a class="chip \${ver.startsWith('DUB') ? 'chip-sub' : ''}" href="\${s.ticketUrl}" target="_blank" rel="noopener" title="\${hhmm(s.start)}–\${hhmm(s.end)}"><span class="t"><b>\${hhmm(s.start)}</b><span>\${tags}</span>\${until ? \`<em>\${until}</em>\` : ''}</span>\${seatHtml(s.seats)}</a></li>\`;
 };
 
 // ---------- cinema picker ----------
@@ -351,9 +369,13 @@ function render() {
   $('#cb-city').textContent = c.city; $('#cb-name').textContent = cinemaLabel(c) + ', ' + c.street.replace(/\\s*\\d{2}-\\d{3}.*$/, '');
   document.title = \`Na co do kina · \${c.city}\`;
 
-  const from = $('#from').value, lang = $('#lang').value;
+  const from = $('#from').value, to = $('#to').value, lang = $('#lang').value;
+  $('#duo').setAttribute('aria-pressed', duo);
+  $('#legend-what').textContent = duo ? 'pary = dwa sąsiednie fotele w dobrej strefie (środek sali, tylne rzędy)' : 'dobre miejsca = środek sali, tylne rzędy';
   const cutoff = from === 'now' ? (day === DATA.days[0] ? Date.now() : 0) : new Date(\`\${day}T\${from}:00+02:00\`).getTime();
-  const shows = DATA.screenings.filter(s => s.cinemaId === cinemaId && s.day === day && new Date(s.start).getTime() >= cutoff
+  // "wychodzę przed 00:30" means the next calendar day
+  const limit = to === 'none' ? Infinity : new Date(\`\${day}T\${to}:00+02:00\`).getTime() + (to < '06:00' ? 86_400_000 : 0);
+  const shows = DATA.screenings.filter(s => s.cinemaId === cinemaId && s.day === day && new Date(s.start).getTime() >= cutoff && new Date(s.end).getTime() <= limit
     && (lang === 'all' || (lang === 'dub' ? s.speaking === 'DUB' : s.speaking !== 'DUB')));
   // one card per film: Ukrainian-dubbed prints ("… - UA") fold into the Polish entry of the same IMDb title
   const groups = {};
@@ -383,22 +405,23 @@ function render() {
   };
   function heroHtml(f) {
     const m = f.m, im = m.imdb;
-    const best = f.shows.find(s => !s.seats || s.seats.good >= 6) ?? f.shows.find(s => !s.seats || s.seats.good >= 1);
+    const best = f.shows.find(s => !s.seats || goodOf(s.seats) >= (duo ? 4 : 6)) ?? f.shows.find(s => !s.seats || goodOf(s.seats) >= 1);
     const others = f.shows.filter(s => s !== best);
     const until = best.day === DATA.days[0] ? untilText(best.start) : '';
-    const why = [\`<b>\${im.rating.toFixed(1)}</b> na IMDb\`, \`seans o <b>\${hhmm(best.start)}</b>\${until ? \` (\${until})\` : ''}\`,
-      best.seats ? (best.seats.good >= 1 ? \`<b>\${best.seats.good}</b> \${plural(best.seats.good, 'dobre miejsce', 'dobre miejsca', 'dobrych miejsc')} jeszcze wolne\` : '') : ''].filter(Boolean);
+    const g = best.seats ? goodOf(best.seats) : null;
+    const why = [\`<b>\${im.rating.toFixed(1)}</b> na IMDb\`, \`seans o <b>\${hhmm(best.start)}</b>\${until ? \` (\${until})\` : ''}, koniec \${hhmm(best.end)}\`,
+      g >= 1 ? (duo ? \`<b>\${g}</b> \${plural(g, 'para', 'pary', 'par')} obok siebie w dobrej strefie\` : \`<b>\${g}</b> \${plural(g, 'dobre miejsce', 'dobre miejsca', 'dobrych miejsc')} jeszcze wolne\`) : ''].filter(Boolean);
     const dayWord = day === DATA.days[0] ? 'dziś' : day === DATA.days[1] ? 'jutro' : dayLabelFor(day).split(',')[0];
     return \`<div class="poster">\${m.poster ? \`<img src="\${esc(m.poster)}" alt="">\` : ''}</div>
       <div class="body">
         <div class="top"><div><p class="lbl">Typ na \${dayWord} · \${esc(c.city)}</p><h2>\${esc(m.title)}</h2>\${m.originalTitle && m.originalTitle !== m.title ? \`<p class="orig">\${esc(m.originalTitle)}</p>\` : ''}</div>\${ratingHtml(m)}</div>
         \${metaHtml(m)}
         <p class="why">Bo \${why.join(', ')}.</p>
-        <div class="cta"><a class="buy" href="\${best.ticketUrl}" target="_blank" rel="noopener">Kup bilet na <b>\${hhmm(best.start)}</b> · \${verOf(best)}</a><button type="button" class="share" id="share" data-text="\${esc(\`Na co do kina \${dayWord} · \${cinemaLabel(c)} \${c.city}: \${m.title} — \${im.rating.toFixed(1)} na IMDb, seans o \${hhmm(best.start)}\${best.seats && best.seats.good >= 1 ? \`, \${best.seats.good} \${plural(best.seats.good, 'dobre miejsce wolne', 'dobre miejsca wolne', 'dobrych miejsc wolnych')}\` : ''}\`)}">Wyślij znajomym</button>\${others.length ? \`<span class="more">inne godziny: \${others.map(s => hhmm(s.start)).join(', ')}</span>\` : ''}</div>
+        <div class="cta"><a class="buy" href="\${best.ticketUrl}" target="_blank" rel="noopener">Kup bilet na <b>\${hhmm(best.start)}</b> · \${verOf(best)}</a><button type="button" class="share" id="share" data-text="\${esc(\`Na co do kina \${dayWord} · \${c.city} (\${cinemaLabel(c)}): \${m.title} — \${im.rating.toFixed(1)} na IMDb, seans o \${hhmm(best.start)}\${g >= 1 ? (duo ? \`, \${g} \${plural(g, 'para', 'pary', 'par')} dobrych miejsc obok siebie\` : \`, \${g} \${plural(g, 'dobre miejsce wolne', 'dobre miejsca wolne', 'dobrych miejsc wolnych')}\`) : ''}\`)}">Wyślij znajomym</button>\${others.length ? \`<span class="more">inne godziny: \${others.map(s => hhmm(s.start)).join(', ')}</span>\` : ''}</div>
       </div>\`;
   }
   // the answer: best film that still has a seat worth sitting in (unknown seats count as fine)
-  const pick = rated.find(f => f.shows.some(s => !s.seats || s.seats.good >= 1));
+  const pick = rated.find(f => f.shows.some(s => !s.seats || goodOf(s.seats) >= 1));
   $('#hero').innerHTML = pick ? heroHtml(pick) : '';
   $('#hero').hidden = !pick;
 
@@ -419,6 +442,8 @@ function render() {
 
 $('#from').addEventListener('change', () => { try { localStorage.setItem('nacodokina.from', $('#from').value); } catch {} render(); });
 $('#lang').addEventListener('change', () => { try { localStorage.setItem('nacodokina.lang', $('#lang').value); } catch {} render(); });
+$('#to').addEventListener('change', () => { try { localStorage.setItem('nacodokina.to', $('#to').value); } catch {} render(); });
+$('#duo').addEventListener('click', () => { duo = !duo; try { localStorage.setItem('nacodokina.duo', duo ? '1' : '0'); } catch {} render(); });
 
 // share the pick: native sheet on phones, clipboard elsewhere
 document.addEventListener('click', async e => {
@@ -447,7 +472,8 @@ $('#refresh').addEventListener('click', async () => {
       const r = await fetch(\`https://restapi.helios.pl/api/cinema/\${cinemaId}/screening/\${s.id}/occupancy\`);
       const taken = new Set((await r.json()).occupiedSeats ?? []);
       const sc = DATA.screens[s.screenId];
-      s.seats = { free: sc.total - taken.size, total: sc.total, good: sc.zone.filter(id => !taken.has(id)).length, goodTotal: sc.zone.length };
+      s.seats = { free: sc.total - taken.size, total: sc.total, good: sc.zone.filter(id => !taken.has(id)).length, goodTotal: sc.zone.length,
+        pairs: sc.pairs.filter(([a, b]) => !taken.has(sc.zone[a]) && !taken.has(sc.zone[b])).length, pairsTotal: sc.pairs.length };
       ok++;
     } catch {}
   }));

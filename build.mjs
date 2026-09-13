@@ -37,7 +37,7 @@ const pickFor = cinema => {
   const best = shows2.find(s => !s.seats || s.seats.good >= 6) ?? shows2.find(s => !s.seats || s.seats.good >= 1);
   const ver = best.speaking === 'DUB' ? (isUaPrint(raw.movies[best.movieId]) ? 'DUB UA' : 'DUB') : best.speaking === 'ORG' ? 'ORG' : 'NAP';
   return { title: f.m.title, orig: f.m.originalTitle, rating: f.m.imdb.rating, votes: f.m.imdb.votes, imdbId: f.m.imdb.id,
-    time: best.start.slice(11, 16), ver, good: best.seats?.good ?? null, goodTotal: best.seats?.goodTotal ?? null, poster: f.m.poster, ticketUrl: best.ticketUrl };
+    time: best.start.slice(11, 16), end: best.end.slice(11, 16), ver, good: best.seats?.good ?? null, goodTotal: best.seats?.goodTotal ?? null, pairs: best.seats?.pairs ?? null, poster: f.m.poster, ticketUrl: best.ticketUrl };
 };
 const picks = {
   generatedAt: raw.generatedAt, day: today, dayLabel: 'dziś',
@@ -50,10 +50,10 @@ const screenIdx = Object.fromEntries(screenIds.map((id, i) => [id, i]));
 const data = {
   generatedAt: raw.generatedAt, days: raw.days, cinemas: raw.cinemas, movies: raw.movies,
   screens: screenIds.map(id => raw.screens[id]),
-  // [id, cinemaId, movieId, screenIdx, start, speaking, feature, print, seats|null]
+  // [id, cinemaId, movieId, screenIdx, start, speaking, feature, print, seats|null, end]
   screenings: raw.screenings.map(s => [s.id, s.cinemaId, s.movieId, screenIdx[s.screenId] ?? -1, s.start.slice(0, 16),
     s.speaking === 'DUB' ? 'D' : s.speaking === 'ORG' ? 'O' : 'N', s.screenFeature ?? '', s.print === '2D IMAX' ? 'I' : '',
-    s.seats ? [s.seats.free, s.seats.total, s.seats.good, s.seats.goodTotal] : null]),
+    s.seats ? [s.seats.free, s.seats.total, s.seats.good, s.seats.goodTotal, s.seats.pairs ?? 0, s.seats.pairsTotal ?? 0] : null, s.end.slice(0, 16)]),
 };
 const generated = new Date(data.generatedAt);
 const dayLabel = fmtDay(today, { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
