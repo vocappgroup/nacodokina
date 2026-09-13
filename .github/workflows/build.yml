@@ -6,25 +6,29 @@ on:
   schedule:
     - cron: '*/30 4-21 * * *'   # UTC; Warsaw is UTC+2 in summer, UTC+1 in winter
   workflow_dispatch:
-concurrency: { group: build, cancel-in-progress: true }
+concurrency:
+  group: build
+  cancel-in-progress: true
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-        with: { node-version: 22 }
+        with:
+          node-version: 22
       - uses: actions/cache@v4
         with:
           path: .cache
           key: imdb-ratings-${{ github.run_id }}
           restore-keys: imdb-ratings-
       - run: node fetch.mjs
-        env: { TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }} }
+        env:
+          TMDB_API_KEY: ${{ secrets.TMDB_API_KEY }}
       - run: node build.mjs
       - name: commit the built page (Vercel deploys on push)
         run: |
           git config user.name  "nacodokina-bot"
           git config user.email "kontakt@nacodokina.pl"
-          git add imdb-cache.json public/index.html
+          git add imdb-cache.json public
           git diff --cached --quiet || (git commit -m "build $(TZ=Europe/Warsaw date '+%Y-%m-%d %H:%M')" && git push)
