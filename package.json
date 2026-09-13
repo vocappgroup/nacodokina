@@ -5,10 +5,12 @@
   "description": "Repertuar Helios posortowany po ocenach IMDb, z wolnymi dobrymi miejscami",
   "repository": "github:vocappgroup/nacodokina",
   "license": "MIT",
-  "engines": { "node": ">=22" },
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
-    "fetch": "node fetch.mjs",
-    "build": "node build.mjs",
+    "site:fetch": "node fetch.mjs",
+    "site:build": "node build.mjs",
     "og": "node og.mjs"
   },
   "dependencies": {
