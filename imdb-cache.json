@@ -105,5 +105,27 @@
   "poster": "https://image.tmdb.org/t/p/w342/A7i16oDi03qrKep5pBfuTWNUTb.jpg"
  },
  "22a5313d-17a4-4e3a-9281-c9a86254eceb": null,
- "8d4f2309-d357-4bc8-8f54-4c557b53ac81": null
+ "8d4f2309-d357-4bc8-8f54-4c557b53ac81": null,
+ "e67862ff-6c77-4ce3-9d80-7b1ec1d4d797": {
+  "id": "tt29630418",
+  "tmdbId": 1314235,
+  "title": "Triumph of the Heart",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/9FP30aoKo3SV9Eobb7a0RBD6DwK.jpg"
+ },
+ "850942b2-8331-4761-906c-fbcfc9d08690": null,
+ "36cb79e7-a766-4502-8b0b-55391a358fc7": {
+  "id": "tt23451240",
+  "tmdbId": 1061785,
+  "title": "Fox and Hare Save the Forest",
+  "year": 2024,
+  "poster": "https://image.tmdb.org/t/p/w342/bn8iy6lEIPmGKZ8qKOkF6Nlg0cS.jpg"
+ },
+ "5b6c9f59-961f-4eba-9329-7a5e7ce8dcf2": {
+  "id": "tt13518550",
+  "tmdbId": 677558,
+  "title": "The Last Whale Singer",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/yIDPrKCgiG49cULhITKxeZywISe.jpg"
+ }
 }
