@@ -127,5 +127,90 @@
   "title": "The Last Whale Singer",
   "year": 2026,
   "poster": "https://image.tmdb.org/t/p/w342/yIDPrKCgiG49cULhITKxeZywISe.jpg"
+ },
+ "13d27372-822e-489c-99b3-83a99c444738": {
+  "id": "tt36164852",
+  "tmdbId": 1187326,
+  "title": "Tad and The Magic Lamp",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/AdDxZgNmRYgDuweY8899buyVqlr.jpg"
+ },
+ "88ffdcfc-835e-4320-8419-3532ce623571": {
+  "id": "tt39602504",
+  "tmdbId": 1396045,
+  "title": "Tell Me What You Feel",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/kolJqRhcJPTYrqbbqOKZ69QGYkB.jpg"
+ },
+ "9f07f3c1-6f40-492e-9b1c-e45e243f9e35": {
+  "id": "tt35538033",
+  "tmdbId": 1423191,
+  "title": "Resident Evil",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg"
+ },
+ "66d52045-c538-4b15-94d7-3ad0d95512f1": {
+  "id": "tt32212403",
+  "tmdbId": 1280015,
+  "title": "Sunny Dancer",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/mXdejPfToSVFlEzv1QYoIh2N53e.jpg"
+ },
+ "5e4df1df-b709-445d-9b3b-f24b7f348aae": {
+  "id": "tt36243564",
+  "tmdbId": 1429348,
+  "title": "The Stranger",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/c7p06jlv8Lp2B5HjUhmFRTRaqJS.jpg"
+ },
+ "e8fb157a-f042-4bc8-aeba-eca36769489a": {
+  "id": "tt0317219",
+  "tmdbId": 920,
+  "title": "Cars",
+  "year": 2006,
+  "poster": "https://image.tmdb.org/t/p/w342/2Touk3m5gzsqr1VsvxypdyHY5ci.jpg"
+ },
+ "3cb6e8d4-f7bc-470c-86f5-2c5709825f02": {
+  "id": "tt35538033",
+  "tmdbId": 1423191,
+  "title": "Resident Evil",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/i7UyjfPio0VFHB9rBUZSFyhOoM8.jpg"
+ },
+ "c30a9874-98da-4721-8d47-d31b84d97bb2": {
+  "id": "tt2467700",
+  "tmdbId": 539745,
+  "title": "Animal Farm",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/6pzI1DIlxwAFffw9OZcG6cr031U.jpg"
+ },
+ "50391edf-e54b-487a-a267-36bd0eecf16b": null,
+ "f4babbc6-b9da-4f72-bb2e-2effbd21457e": {
+  "id": "tt22084616",
+  "tmdbId": 969681,
+  "title": "Spider-Man: Brand New Day",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/bjiS5ipwxb9JFy3XRRN4OAilSeX.jpg"
+ },
+ "bf2de12a-d537-45d0-924d-13ff4debb0b5": {
+  "id": "tt10039364",
+  "tmdbId": 856470,
+  "title": "Mamma Moo Finds Her Way Home",
+  "year": 2021,
+  "poster": "https://image.tmdb.org/t/p/w342/osda6zGaloSOrAQ5uVgIMDgIRyA.jpg"
+ },
+ "19081d7d-6bbf-4e28-9fd6-1da09718734e": {
+  "id": "tt19896206",
+  "tmdbId": 1040342,
+  "title": "Hug Me. Honey Seekers",
+  "year": 2022,
+  "poster": "https://image.tmdb.org/t/p/w342/wrjCe7y7soHG807944rIn5MFMkh.jpg"
+ },
+ "c627c9bc-83a1-4d4b-971a-6a04c2c17e96": {
+  "id": "tt38582706",
+  "tmdbId": 1365598,
+  "title": "Arnie & Barney",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/5fZTa32wRIMFOpiZHiareZDjUIo.jpg"
  }
 }
