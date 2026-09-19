@@ -226,5 +226,19 @@
   "title": "Forgotten Island",
   "year": 2026,
   "poster": "https://image.tmdb.org/t/p/w342/Lr0Ng7Gg02RW1AyfYEL6P0WUvd.jpg"
+ },
+ "d477e2b7-3151-4b98-a7ff-49831f42d751": {
+  "id": "tt1754656",
+  "tmdbId": 309809,
+  "title": "The Little Prince",
+  "year": 2015,
+  "poster": "https://image.tmdb.org/t/p/w342/je5Z7gbFTzrs3FPHINo9yGiHoVo.jpg"
+ },
+ "c2e1c309-a5be-4043-9f20-8925a9e934fd": {
+  "id": "tt20259240",
+  "tmdbId": 1151265,
+  "title": "The Girl in the Clouds",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/5lpoAYLV0oOf9mcGslQoEeJSCAI.jpg"
  }
 }
