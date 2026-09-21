@@ -247,5 +247,26 @@
   "title": "The Altar Boys",
   "year": 2025,
   "poster": "https://image.tmdb.org/t/p/w342/xLg48qmaf6cRjT179jQ04xg2nbb.jpg"
+ },
+ "f5d309a0-b1a8-4b8f-b6aa-82300425cc59": {
+  "id": "tt38635633",
+  "tmdbId": 1559535,
+  "title": "Time Hoppers: The Silk Road",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/4kvhX5E9qiBCreNVIGSp7gikD5j.jpg"
+ },
+ "6a5dabbc-00aa-438d-bc11-15e4447e76c1": {
+  "id": "tt32729868",
+  "tmdbId": 1308004,
+  "title": "Bert sabbar allt",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/lqXRrAyPr3YLGVcxZ5XKDxMIfsh.jpg"
+ },
+ "59a6bd60-2e5e-40e3-8965-df3cdca3fb66": {
+  "id": "tt0090610",
+  "tmdbId": 21394,
+  "title": "The Children of Noisy Village",
+  "year": 1986,
+  "poster": "https://image.tmdb.org/t/p/w342/3J8XDd1MmwfWlUFktdw313otVbR.jpg"
  }
 }
