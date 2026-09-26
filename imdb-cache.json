@@ -333,5 +333,42 @@
   "title": "Avengers: Endgame",
   "year": 2019,
   "poster": "https://image.tmdb.org/t/p/w342/ulzhLuWrPK07P1YkdWQLZnQh1JL.jpg"
+ },
+ "e1b31f3e-5046-45d7-b3b6-94173217364b": null,
+ "edf3ada1-858e-4586-a969-67b2163452c8": {
+  "id": "tt22037070",
+  "tmdbId": 1061794,
+  "title": "Iggy the Eagle",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/tjRrqf6y61Q04ZOS5PSKMHOV24Q.jpg"
+ },
+ "0807e007-5f61-48dd-9611-19a6aa82b3c1": {
+  "id": "tt37540986",
+  "tmdbId": 1523070,
+  "title": "Prendiamoci una pausa",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/3C0ru5cyzMS761V7LhhboBsmknW.jpg"
+ },
+ "12db6303-5cab-46c7-be3b-9d8bcfceace2": {
+  "id": "tt37162310",
+  "tmdbId": 947474,
+  "title": "Born in the Jungle",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/Ajl53X10Nk9ohrTnmxXEnmpEkdX.jpg"
+ },
+ "d74fde03-2824-4433-bc54-be719d529273": {
+  "id": "tt19896206",
+  "tmdbId": 1040342,
+  "title": "Hug Me. Honey Seekers",
+  "year": 2022,
+  "poster": "https://image.tmdb.org/t/p/w342/wrjCe7y7soHG807944rIn5MFMkh.jpg"
+ },
+ "d9d2af36-0873-431e-bbc7-fc5ef3e44804": null,
+ "c549bc69-02c3-49e4-9467-e486d8cb433d": {
+  "id": "tt35715517",
+  "tmdbId": 1684318,
+  "title": "Dudley & the Invasion of the Space Slugs",
+  "year": 2027,
+  "poster": "https://image.tmdb.org/t/p/w342/vIjAALPzNGe1BX0LcCxfUEOmjuI.jpg"
  }
 }
