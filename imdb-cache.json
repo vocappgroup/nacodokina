@@ -370,5 +370,42 @@
   "title": "Dudley & the Invasion of the Space Slugs",
   "year": 2027,
   "poster": "https://image.tmdb.org/t/p/w342/vIjAALPzNGe1BX0LcCxfUEOmjuI.jpg"
+ },
+ "979c36fd-575e-437f-9705-eb800476b893": {
+  "id": "tt37082105",
+  "tmdbId": 1321666,
+  "title": "The Doll",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/mU8squGiM5tybYBHhjg4jPUzOCl.jpg"
+ },
+ "b54da339-04b6-4e8c-8661-4961890ec6e6": null,
+ "d2a0b727-5997-4346-bff2-e0d472af7cec": {
+  "id": "tt0250223",
+  "tmdbId": 2899,
+  "title": "Asterix & Obelix: Mission Cleopatra",
+  "year": 2002,
+  "poster": "https://image.tmdb.org/t/p/w342/i4k9LPyy2j5d6m5bzDaZj0E7eR7.jpg"
+ },
+ "4a26fe54-46f2-4bf7-aa5b-2034bb0ce227": {
+  "id": "tt14813764",
+  "tmdbId": 680770,
+  "title": "Fleak",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/jLox5c77lT07Izve72UusCN22yR.jpg"
+ },
+ "040d2e11-ff64-4722-b82a-cc2730855c50": {
+  "id": "tt35300281",
+  "tmdbId": 1176932,
+  "title": "A Girl Named Willow",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/91o854WcptbixlbqybQTzz5BeIv.jpg"
+ },
+ "d9b28e17-1444-4660-b56d-67866f8e9f86": null,
+ "de2de832-eb80-4425-9caa-24579114b1a1": {
+  "id": "tt27695172",
+  "tmdbId": 1149137,
+  "title": "Lampo, the Travelling Dog",
+  "year": 2023,
+  "poster": "https://image.tmdb.org/t/p/w342/bC9K8ZWqSIG7sfe2XHzw73Sc8MC.jpg"
  }
 }
