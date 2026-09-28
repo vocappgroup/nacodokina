@@ -407,5 +407,28 @@
   "title": "Lampo, the Travelling Dog",
   "year": 2023,
   "poster": "https://image.tmdb.org/t/p/w342/bC9K8ZWqSIG7sfe2XHzw73Sc8MC.jpg"
+ },
+ "482f71e6-85bd-46f6-8de4-4d98ffd75b5b": {
+  "id": "tt31712800",
+  "tmdbId": 1280941,
+  "title": "The Boy with Pink Pants",
+  "year": 2024,
+  "poster": "https://image.tmdb.org/t/p/w342/2UI9pOCyvn7ibrFHleOo0PceAyD.jpg"
+ },
+ "471eaa84-dce1-4b8c-b92c-db656dddaeed": null,
+ "e91bfbd6-0cc0-4aa8-adb2-8c104e06fd9b": {
+  "id": "tt36841161",
+  "tmdbId": 1477104,
+  "title": "Shaun the Sheep: The Beast of Mossy Bottom",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/mMOptSPBVGUA9GHgnpsC35GzZ7e.jpg"
+ },
+ "f9d02966-3572-4d95-8ace-521381e85fdc": null,
+ "8df279bc-81d4-4fe9-9c8a-48cbf2e2565f": {
+  "id": "tt31109276",
+  "tmdbId": 1061799,
+  "title": "Julián",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/j36gobU51TFw7LCxl92AOIRBdwd.jpg"
  }
 }
