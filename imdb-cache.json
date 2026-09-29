@@ -430,5 +430,20 @@
   "title": "Julián",
   "year": 2026,
   "poster": "https://image.tmdb.org/t/p/w342/j36gobU51TFw7LCxl92AOIRBdwd.jpg"
+ },
+ "568f1347-21c1-4b01-a534-34f71987336f": null,
+ "5a325304-7768-4ab0-9217-b8e55326cc6e": {
+  "id": "tt12869464",
+  "tmdbId": 1206564,
+  "title": "The Treasurer",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/6Z8yo5tSNPWpxpizt1jlYBunY1R.jpg"
+ },
+ "fc0e85af-6717-45b8-88dc-bb0622b9b0a3": {
+  "id": "tt35705226",
+  "tmdbId": 1178532,
+  "title": "Moon the Panda",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/2jcQNxdAt6ory848JlVGIuKbuKe.jpg"
  }
 }
