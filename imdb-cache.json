@@ -481,5 +481,20 @@
   "title": "Verity",
   "year": 2026,
   "poster": "https://image.tmdb.org/t/p/w342/e2t7NjahJTgz2PMx2BW4ZRgHR6Z.jpg"
- }
+ },
+ "5af2b933-3a64-4a24-978b-1d53750e1d98": {
+  "id": "tt21431604",
+  "tmdbId": 1545652,
+  "title": "Handbook for Superheroes",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/lOz19YMZpSDilSmFBHmk8r980yS.jpg"
+ },
+ "93d78bc8-af4f-4955-ae8a-b458a9db8ae7": {
+  "id": "tt0170351",
+  "tmdbId": 4966,
+  "title": "The Last Days",
+  "year": 1999,
+  "poster": "https://image.tmdb.org/t/p/w342/kWomf1J9CNZmD0P9IntFEGlAe12.jpg"
+ },
+ "a991dd91-ee7a-4010-afbf-7225d487b611": null
 }
