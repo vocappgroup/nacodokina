@@ -504,5 +504,55 @@
   "title": "Woodwalkers",
   "year": 2024,
   "poster": "https://image.tmdb.org/t/p/w342/bC1r04ohuxv5feaGDzQ0lXz7Bbl.jpg"
+ },
+ "63eddf60-0b84-44d0-901e-85651115bf53": {
+  "id": "tt34206385",
+  "tmdbId": 1375441,
+  "title": "Primetime",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/lmrulvLbmaejTix1YaMxo1oGhH1.jpg"
+ },
+ "ef62dbe6-e2dc-4cac-8600-f757aa17d865": {
+  "id": "tt37510326",
+  "tmdbId": 1281331,
+  "title": "The Social Reckoning",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/nZ8cQbjAQHRuSqwxvuYhOfxyhfW.jpg"
+ },
+ "36429760-6495-4a94-ad59-297fc99bf706": {
+  "id": "tt37510326",
+  "tmdbId": 1281331,
+  "title": "The Social Reckoning",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/nZ8cQbjAQHRuSqwxvuYhOfxyhfW.jpg"
+ },
+ "8661d51c-c922-40af-84dc-bda6835e6bae": {
+  "id": "tt31450459",
+  "tmdbId": 1248832,
+  "title": "Digger",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/1ATXKrIPJyKNwnJ6lcG088Sa6zi.jpg"
+ },
+ "e01d0748-6a81-4b58-a935-1495917a6fb5": {
+  "id": "tt11893676",
+  "tmdbId": 853387,
+  "title": "Lord of Misrule",
+  "year": 2023,
+  "poster": "https://image.tmdb.org/t/p/w342/3cxMwPuV5BroI91DZLGdio6WB34.jpg"
+ },
+ "33e6d145-9b54-4d52-9766-73939ca6dd7e": {
+  "id": "tt5822536",
+  "tmdbId": 516729,
+  "title": "Paddington in Peru",
+  "year": 2024,
+  "poster": "https://image.tmdb.org/t/p/w342/1ffZAucqfvQu36x1C49XfOdjuOG.jpg"
+ },
+ "204c4d78-6c8c-4039-ae1f-7d7a13d7f12c": null,
+ "d926ad52-f3e8-4f83-9e44-5da4015e44d5": {
+  "id": "tt3566834",
+  "tmdbId": 950387,
+  "title": "A Minecraft Movie",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/yFHHfHcUgGAxziP1C3lLt0q2T4s.jpg"
  }
 }
