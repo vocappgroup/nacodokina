@@ -596,5 +596,19 @@
   "title": "Rose",
   "year": 2026,
   "poster": "https://image.tmdb.org/t/p/w342/4k3ph6BoeZr7IMiQx8ioEV8d9cJ.jpg"
+ },
+ "efba3b90-d2db-4d41-b474-60d596a59302": {
+  "id": "tt32429174",
+  "tmdbId": 1399462,
+  "title": "Calle Malaga",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/fWagBXNDk44UaupYtwQOAvDwGiT.jpg"
+ },
+ "47ba4d92-f50d-402c-8b66-3a441e34de8f": {
+  "id": "tt40135324",
+  "tmdbId": 1430655,
+  "title": "Horse on a Stick",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/jqd2cLtyZ9RlVTZd9fe2lWZF0BV.jpg"
  }
 }
