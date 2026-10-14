@@ -617,5 +617,27 @@
   "title": "Kleks Academy",
   "year": 2024,
   "poster": "https://image.tmdb.org/t/p/w342/ymbECZscR8BTkdvXziSinMIckAz.jpg"
+ },
+ "444f66e3-b300-410e-9684-a6d6126be4e8": null,
+ "3dabe041-904d-4bf4-b3e4-c7eb5d5e052f": {
+  "id": "tt13609648",
+  "tmdbId": 1503762,
+  "title": "Sense and Sensibility",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/czsyPHosFNbh4PPqXfqWu1aBXnA.jpg"
+ },
+ "e5032bab-08fb-408d-b765-d21ab8f2329b": {
+  "id": "tt27419420",
+  "tmdbId": 1153576,
+  "title": "Street Fighter",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/ayzSlhCYuwV1MHT5kQaVJ0vH9fQ.jpg"
+ },
+ "aceba94f-6f98-479c-b85d-dcbcace5bc45": {
+  "id": "tt28535715",
+  "tmdbId": 1255833,
+  "title": "Whalefall",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/vjTYUTgh9nO88i6HZ4YPRhiFL05.jpg"
  }
 }
