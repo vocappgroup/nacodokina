@@ -669,5 +669,49 @@
   "title": "Gorky Resort",
   "year": 2026,
   "poster": "https://image.tmdb.org/t/p/w342/hbkGSbaH5stix008VRYQBBUYwhQ.jpg"
- }
+ },
+ "011d2b9e-c9c0-437c-a98c-2d828cc92263": {
+  "id": "tt36586020",
+  "tmdbId": 1400837,
+  "title": "Other Mommy",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/fGRNCssTRrhYZxNzykGGCoMsAVq.jpg"
+ },
+ "42b11e69-fff8-4c15-a32c-e3e3e58f9f9b": {
+  "id": "tt31349844",
+  "tmdbId": 1377237,
+  "title": "Runner",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/yBKMAIj7clP42UkFejhGDBBoTpb.jpg"
+ },
+ "c87e6eb5-abad-4d61-9a7f-5e7fb03f1af5": null,
+ "6feae1b6-5c1e-4c3c-9148-03d945d91fc2": {
+  "id": "tt0816692",
+  "tmdbId": 157336,
+  "title": "Interstellar",
+  "year": 2014,
+  "poster": "https://image.tmdb.org/t/p/w342/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg"
+ },
+ "f51ac3df-f07c-484d-9e3f-5e8e61463cdf": {
+  "id": "tt14371256",
+  "tmdbId": 858035,
+  "title": "Klara and the Sun",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/xqovj2p6HRsgHxN81qYAYF4StgM.jpg"
+ },
+ "fb795f0c-0720-43a3-b44a-8d9de2360a70": {
+  "id": "tt3262342",
+  "tmdbId": 339877,
+  "title": "Loving Vincent",
+  "year": 2017,
+  "poster": "https://image.tmdb.org/t/p/w342/56sq57kDm7XgyXBYrgJLumo0Jac.jpg"
+ },
+ "194f0814-88d8-49c9-b710-b742126fd032": {
+  "id": "tt5475734",
+  "tmdbId": 430727,
+  "title": "303 Squadron",
+  "year": 2018,
+  "poster": "https://image.tmdb.org/t/p/w342/a3O1zY9INsubcJp1od8ccQULfhm.jpg"
+ },
+ "d56f5e01-0034-4615-bf84-5ce44f0baa3d": null
 }
