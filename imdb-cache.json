@@ -655,5 +655,19 @@
   "title": "Fatherland",
   "year": 2026,
   "poster": "https://image.tmdb.org/t/p/w342/oNejN1l69nBF8LdQwy5FkAQZT44.jpg"
+ },
+ "7ab786a5-b59c-4011-8428-59535f626ce6": {
+  "id": "tt15538570",
+  "tmdbId": 920220,
+  "title": "Johnny",
+  "year": 2022,
+  "poster": "https://image.tmdb.org/t/p/w342/6UoWEfDbLm8q9VtrnLRp0ORzbNd.jpg"
+ },
+ "e09a334e-42f5-4b8b-82c6-ed98db9b0402": {
+  "id": "tt32869207",
+  "tmdbId": 1306884,
+  "title": "Gorky Resort",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/hbkGSbaH5stix008VRYQBBUYwhQ.jpg"
  }
 }
