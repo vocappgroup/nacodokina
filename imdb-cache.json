@@ -713,5 +713,33 @@
   "year": 2018,
   "poster": "https://image.tmdb.org/t/p/w342/a3O1zY9INsubcJp1od8ccQULfhm.jpg"
  },
- "d56f5e01-0034-4615-bf84-5ce44f0baa3d": null
+ "d56f5e01-0034-4615-bf84-5ce44f0baa3d": null,
+ "7780ad74-9f41-48d1-b20b-abadaeee13ca": {
+  "id": "tt34890576",
+  "tmdbId": 1400940,
+  "title": "Clayface",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/5jCpQnWPikggmQZoDp1eAi6BI6w.jpg"
+ },
+ "e5d643e0-8ae0-4eae-ac74-fe999eac48a9": {
+  "id": "tt35571123",
+  "tmdbId": 1396056,
+  "title": "Our Revolution",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/xKy9qtcumqXJqCv0Kzx3JiM5C90.jpg"
+ },
+ "038c3baf-367b-4be6-b727-6171bfa5fe70": {
+  "id": "tt45368240",
+  "tmdbId": 1765072,
+  "title": "You Can See Everything",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/Ap8QwmKfSjYbWC4XIP8w9pdn72O.jpg"
+ },
+ "6219f570-ced4-42d3-98b0-0afa8957e4fe": {
+  "id": "tt11378946",
+  "tmdbId": 936075,
+  "title": "Michael",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/dueFqKLvjftnELZaGYwY7xinfaI.jpg"
+ }
 }
