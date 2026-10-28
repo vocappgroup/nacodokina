@@ -755,5 +755,33 @@
   "title": "Winners",
   "year": 2024,
   "poster": "https://image.tmdb.org/t/p/w342/kocS1qAWPKGpTo9RNCOi7CtPFxA.jpg"
+ },
+ "a5244a37-a68e-40bc-83bb-62b942789e45": {
+  "id": "tt27369017",
+  "tmdbId": 1058424,
+  "title": "Hope",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/6VY1ZKgpsc8CfGsQcCGiYEgHdH0.jpg"
+ },
+ "16367763-a133-4194-8957-ff52f639f600": {
+  "id": "tt34890576",
+  "tmdbId": 1400940,
+  "title": "Clayface",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/9l1NuFjel2j89hiuiJbsxfblqjy.jpg"
+ },
+ "3651babd-0427-4dcb-bbe9-461592c32148": {
+  "id": "tt22406048",
+  "tmdbId": 1462861,
+  "title": "Spider Island",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/eKw6aF7oNEaTnVvN396Q1is9R1n.jpg"
+ },
+ "0d7469dd-3983-4f9a-8f96-ebdad8e53a4d": {
+  "id": "tt35659725",
+  "tmdbId": 677561,
+  "title": "The Legendaries",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/AlfndBQucnWC7igEIG2L0sk6tiF.jpg"
  }
 }
