@@ -804,5 +804,14 @@
   "title": "Breaking the Limits",
   "year": 2017,
   "poster": "https://image.tmdb.org/t/p/w342/b9ZwoLW1sD2DST53lAQAE8Fog0a.jpg"
+ },
+ "db5f5192-d06d-42ba-bc33-73f7e77bec0a": null,
+ "f12f0280-ce2e-4776-928e-222d038b4955": null,
+ "5bd7aaac-1375-4089-8d2a-a4d0b5a261fa": {
+  "id": "tt2321555",
+  "tmdbId": 1117898,
+  "title": "The Cat in the Hat",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/tYH4rQZlHtuFSeDS0bsV17khvJC.jpg"
  }
 }
