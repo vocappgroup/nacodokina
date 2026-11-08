@@ -828,5 +828,19 @@
   "title": "Das Glaszimmer",
   "year": 2020,
   "poster": "https://image.tmdb.org/t/p/w342/iaEaoJPd6GCirxu9HiLHy2NwtvZ.jpg"
+ },
+ "64cf80fd-797d-48a5-835f-7d5193c8d524": {
+  "id": "tt36454107",
+  "tmdbId": 964311,
+  "title": "Vinski 2",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/w9yhs9mZrYEqGIykM9RKzG5Cqev.jpg"
+ },
+ "5d893c89-a6af-4827-8a68-07bd8c7fc4ca": {
+  "id": "tt26423054",
+  "tmdbId": 1136765,
+  "title": "Lars Is LOL",
+  "year": 2023,
+  "poster": "https://image.tmdb.org/t/p/w342/nrLeaBCOoh75JwxjlIORmXXPL2u.jpg"
  }
 }
