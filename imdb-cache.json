@@ -842,5 +842,26 @@
   "title": "Lars Is LOL",
   "year": 2023,
   "poster": "https://image.tmdb.org/t/p/w342/nrLeaBCOoh75JwxjlIORmXXPL2u.jpg"
+ },
+ "d9df7246-be81-4676-9544-ced2b7cb8f92": {
+  "id": "tt34374553",
+  "tmdbId": 1379486,
+  "title": "Victorian Psycho",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/9LHVZevgdsdbjJdkFr6bk9EwX7q.jpg"
+ },
+ "453fc864-c969-4767-8f6d-dabbe5ea711e": {
+  "id": "tt44071505",
+  "tmdbId": 1749825,
+  "title": "Ebenezer Scrooge: A Christmas Carol Horror",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/AgmA793SvgZidRwYJvba5MjK3m1.jpg"
+ },
+ "888193ff-8b9b-4fc8-8dd4-4ea80d65aa0c": {
+  "id": "tt1756855",
+  "tmdbId": 1204680,
+  "title": "Coyote vs. Acme",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg"
  }
 }
