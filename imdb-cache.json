@@ -863,5 +863,27 @@
   "title": "Coyote vs. Acme",
   "year": 2026,
   "poster": "https://image.tmdb.org/t/p/w342/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg"
- }
+ },
+ "97f9b1fc-3f8b-40bd-a52f-227e2fb0f06a": {
+  "id": "tt15799564",
+  "tmdbId": 891621,
+  "title": "Wild Horse Nine",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/dNJFRtVg3xLQ7dbNIQ55cmmIniD.jpg"
+ },
+ "5ed00d36-066a-49b2-aefa-9e54ec6e34df": {
+  "id": "tt0457430",
+  "tmdbId": 1417,
+  "title": "Pan's Labyrinth",
+  "year": 2006,
+  "poster": "https://image.tmdb.org/t/p/w342/khBQ6nN5FLfg9XgPXIZDkABJjqo.jpg"
+ },
+ "cafb7ddd-6ef5-4fe6-a36d-d8f39ea38a4b": {
+  "id": "tt35866986",
+  "tmdbId": 1437511,
+  "title": "How to Rob a Bank",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/ifYDZkr2qkHFz87TNVvlxajOxl5.jpg"
+ },
+ "112f6be6-5496-492b-9166-8bf9619e30c8": null
 }
