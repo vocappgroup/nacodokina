@@ -892,5 +892,26 @@
   "title": "Unplanned",
   "year": 2019,
   "poster": "https://image.tmdb.org/t/p/w342/tvCtAz8z5tF49a7q9RRHvxiTjzv.jpg"
+ },
+ "7e576957-e634-433a-ab4a-f20cfc2dea5f": {
+  "id": "tt29567915",
+  "tmdbId": 1214931,
+  "title": "Nuremberg",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/xthXNYltOOm80vW5Kxjzxx5gvQ6.jpg"
+ },
+ "73542b77-1ed8-4382-901e-d1f81a9fce88": {
+  "id": "tt41475646",
+  "tmdbId": 1578318,
+  "title": "Santa's Workshop",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/zfredju0Nk5pyaLpbD4SJ7dYAmw.jpg"
+ },
+ "c28455bb-2bbe-4665-81e8-6a4bd340b105": {
+  "id": "tt29003256",
+  "tmdbId": 1286995,
+  "title": "The Elf",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/zEevTwf2LeYEbTO7J2gT65Beq7G.jpg"
  }
 }
