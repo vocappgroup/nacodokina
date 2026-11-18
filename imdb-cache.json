@@ -935,5 +935,54 @@
   "year": 2023,
   "poster": null
  },
- "b25b87b6-6957-4a1c-8b13-953730a270bc": null
+ "b25b87b6-6957-4a1c-8b13-953730a270bc": null,
+ "d3dff0d4-84a7-4322-9288-951afcb825d7": {
+  "id": "tt11995650",
+  "tmdbId": 1286656,
+  "title": "I Play Rocky",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/xE5tY3lppZUyG7WKKThsuYHuAHr.jpg"
+ },
+ "4235fc1d-0528-42b1-872e-2087b84ae174": {
+  "id": "tt10794054",
+  "tmdbId": 1433583,
+  "title": "The Weight",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/8i5iZV50CoEtmDCFM7RSxCkpE8h.jpg"
+ },
+ "ec975dfa-350d-46c6-b069-30d1c4ebf0f8": {
+  "id": "tt27988879",
+  "tmdbId": 656908,
+  "title": "Ramayana: Rise of a Legend",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/vBQ7wks68OhJKlb3RnXSl2yXBXK.jpg"
+ },
+ "11f0bc4e-eb2e-4e31-bf3f-f753b66b4f57": {
+  "id": "tt32558705",
+  "tmdbId": 1300968,
+  "title": "The Hunger Games: Sunrise on the Reaping",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/jNcZH8yplxttRlf0wwqfGGMKHxX.jpg"
+ },
+ "1dbfa87f-7174-491b-a586-f77df1e62be5": {
+  "id": "tt1756855",
+  "tmdbId": 1204680,
+  "title": "Coyote vs. Acme",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/kYDCl2y0VPvhT5eYWbMRInPoB03.jpg"
+ },
+ "32385436-a991-4a66-9746-bb3904acb8ee": {
+  "id": "tt38468551",
+  "tmdbId": 1550622,
+  "title": "La Perra",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/7NnGuz9mXhr6HkOAS0AyYgkAPZQ.jpg"
+ },
+ "850fd57e-cb91-4691-8439-1796e483eba3": {
+  "id": "tt32368068",
+  "tmdbId": 1309373,
+  "title": "Whispers in the Woods",
+  "year": 2025,
+  "poster": "https://image.tmdb.org/t/p/w342/6UCVRxRpZRXfDUPu9vwoGUEPYQ3.jpg"
+ }
 }
