@@ -1006,5 +1006,33 @@
   "title": "Sundays",
   "year": 2025,
   "poster": "https://image.tmdb.org/t/p/w342/3682SbY3rsNKsQzFpPUKrWdGmmx.jpg"
+ },
+ "6c697dac-9dcb-435b-b680-4830d6af89d1": {
+  "id": "tt8773020",
+  "tmdbId": 577122,
+  "title": "Rocca Changes the World",
+  "year": 2019,
+  "poster": "https://image.tmdb.org/t/p/w342/AmCCtVXmUVgEa3TzrSnIIppS5LP.jpg"
+ },
+ "4b430305-24bb-452a-a977-e044ade87690": {
+  "id": "tt7599146",
+  "tmdbId": 678512,
+  "title": "Sound of Freedom",
+  "year": 2023,
+  "poster": "https://image.tmdb.org/t/p/w342/qA5kPYZA7FkVvqcEfJRoOy4kpHg.jpg"
+ },
+ "985a39c1-c19f-4e1a-a8ff-e73f43eb6e72": {
+  "id": "tt38077943",
+  "tmdbId": 1538497,
+  "title": "Hexed",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/yykeYKbDBM9eUMJUucaaDo2mi1p.jpg"
+ },
+ "45a49799-bb45-4d06-b58f-834e518cfca3": {
+  "id": "tt36408401",
+  "tmdbId": 1457866,
+  "title": "THE FURTHER MIS-ADVENTURES OF CLIFF BOOTH",
+  "year": 2026,
+  "poster": "https://image.tmdb.org/t/p/w342/thX8Rs7nfgmPHfCgjoFuRovy49l.jpg"
  }
 }
